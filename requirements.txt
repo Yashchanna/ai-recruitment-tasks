@@ -1,0 +1,17 @@
+google-generativeai
+feedparser
+requests
+beautifulsoup4
+moviepy
+edge-tts
+pillow
+streamlit
+python-dotenv
+pytrends
+gitpython
+fastapi
+uvicorn
+jinja2
+rich
+typer
+httpx

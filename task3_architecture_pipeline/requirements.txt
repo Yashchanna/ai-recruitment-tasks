@@ -1,0 +1,8 @@
+fastapi
+google-generativeai
+pydantic
+beautifulsoup4
+requests
+python-dotenv
+feedparser
+edge-tts

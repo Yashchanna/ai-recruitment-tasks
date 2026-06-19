@@ -1,0 +1,12 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+*.mp4
+*.mp3
+*.wav
+task1_video_generator/output/
+node_modules/
+.vercel/
+*.log
+Thumbs.db

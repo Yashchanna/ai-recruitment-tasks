@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Architecture Pipeline — Generator</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+      body{font-family:Arial,Helvetica,sans-serif;max-width:900px;margin:32px auto;color:#222}
+      h1{color:#0b5;}
+      .card{border:1px solid #eee;padding:16px;border-radius:8px;margin:12px 0;background:#fff}
+      label{font-weight:600}
+      textarea{width:100%;min-height:120px;padding:8px}
+      pre{background:#f7f7f7;padding:8px;border-radius:6px;overflow:auto}
+      .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    </style>
+  </head>
+  <body>
+    <h1>Architecture Generator</h1>
+    <p>Enter a short high-level requirement and click Generate. The tool returns modules, DB schemas, and sample pseudocode. No credentials needed.</p>
+
+    <div class="card">
+      <label for="req">Business requirement</label>
+      <textarea id="req">Small web app for products, orders, and payments with user auth</textarea>
+      <div style="margin-top:8px">
+        <button id="go">Generate</button>
+      </div>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+      async function renderResult(data){
+        const r = document.getElementById('result');
+        r.innerHTML = '';
+
+        const intro = document.createElement('div'); intro.className='card';
+        intro.innerHTML = '<h3>Result</h3><p>Below are the inferred modules, database schemas, and pseudocode flows. Use Copy JSON to copy the full output.</p>';
+        r.appendChild(intro);
+
+        // client-side override: adjust frontend tech based on keywords in the user's requirement
+        const reqText = (document.getElementById('req')||{value:''}).value.toLowerCase();
+        const modulesData = (data.modules||[]).map(m => ({...m}));
+        let overrideTech = null;
+        if (reqText.includes('react native') || reqText.includes('react-native')) overrideTech = 'React Native';
+        else if (reqText.includes('flutter') || reqText.includes('dart')) overrideTech = 'Flutter (Dart)';
+        else if (reqText.includes('android') || reqText.includes('kotlin') || reqText.includes('java')) overrideTech = 'Android (Kotlin/Java)';
+        else if (reqText.includes('ios') || reqText.includes('swift') || reqText.includes('objective-c')) overrideTech = 'iOS (Swift)';
+        else if (reqText.includes('mobile')) overrideTech = 'Mobile (React Native / Flutter)';
+        if (overrideTech) {
+          let found=false;
+          for (let m of modulesData) {
+            if (m.name && m.name.toLowerCase()==='frontend') { m.tech = overrideTech; found=true; break; }
+          }
+          if (!found) modulesData.unshift({name:'frontend', purpose:'User interface', tech:overrideTech});
+        }
+        const modules = document.createElement('div'); modules.className='card';
+        modules.innerHTML = '<h2>Modules</h2>' + modulesData.map(m=>`<div style="margin:6px 0"><strong>${m.name}</strong>: ${m.purpose} — <em>${m.tech}</em></div>`).join('');
+        r.appendChild(modules);
+
+        const schemas = document.createElement('div'); schemas.className='card';
+        schemas.innerHTML = '<h2>Schemas</h2>' + (Object.keys(data.schemas).length?Object.keys(data.schemas).map(k=>`<h4>${k}</h4><pre>${JSON.stringify(data.schemas[k],null,2)}</pre>`).join(''):'<em>No schemas inferred.</em>');
+        r.appendChild(schemas);
+
+        const pseudo = document.createElement('div'); pseudo.className='card';
+        pseudo.innerHTML = '<h2>Pseudocode</h2>' + (Object.keys(data.pseudocode).length?Object.keys(data.pseudocode).map(k=>`<h4>${k}</h4><pre>${data.pseudocode[k].join('\n')}</pre>`).join(''):'<em>No pseudocode generated.</em>');
+        r.appendChild(pseudo);
+
+        const controls = document.createElement('div'); controls.style.marginTop='8px';
+        const jsonBtn = document.createElement('button'); jsonBtn.textContent='Copy JSON'; jsonBtn.style.marginRight='8px';
+        jsonBtn.onclick = ()=>{ navigator.clipboard.writeText(JSON.stringify(data,null,2)).then(()=>alert('Copied to clipboard')); };
+        controls.appendChild(jsonBtn);
+
+        const mdBtn = document.createElement('button'); mdBtn.textContent='Export Markdown';
+        mdBtn.onclick = ()=>{
+          const mdParts = [];
+          mdParts.push('### Modules\n');
+          mdParts.push(data.modules.map(m=>`- **${m.name}**: ${m.purpose} — *${m.tech}*`).join('\n'));
+          mdParts.push('\n\n### Schemas\n');
+          for(const k of Object.keys(data.schemas)){
+            mdParts.push('#### '+k+'\n```json\n'+JSON.stringify(data.schemas[k],null,2)+'\n```');
+          }
+          mdParts.push('\n\n### Pseudocode\n');
+          for(const k of Object.keys(data.pseudocode)){
+            mdParts.push('#### '+k+'\n```\n'+data.pseudocode[k].join('\n')+'\n```');
+          }
+          const blob = new Blob([mdParts.join('\n\n')], {type:'text/markdown'});
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a'); a.href=url; a.download='architecture.md'; a.click();
+          URL.revokeObjectURL(url);
+        };
+        controls.appendChild(mdBtn);
+
+        r.appendChild(controls);
+      }
+
+      document.getElementById('go').addEventListener('click', async ()=>{
+        const req = document.getElementById('req').value;
+        document.getElementById('result').innerHTML = '<div class="card"><em>Generating... (local parser)</em></div>';
+        try{
+          const apiBase = window.location.protocol === 'file:' ? 'http://127.0.0.1:8000' : window.location.origin;
+          const resp = await fetch(`${apiBase}/api/generate`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({requirements:req})});
+          if(!resp.ok){ const txt = await resp.text(); document.getElementById('result').innerHTML = `<div class="card">Error ${resp.status}: ${txt}</div>`; return; }
+          const data = await resp.json();
+          renderResult(data);
+        }catch(e){
+          document.getElementById('result').innerHTML = `<div class="card">Error: ${e}</div>`;
+        }
+      });
+    </script>
+  </body>
+</html>

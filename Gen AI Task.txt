@@ -1,0 +1,53 @@
+Task 1: AI Video Generation Tool (Time Required: ~1 day) 
+• Objective: Create an AI based application or tool which generates videos while 
+scrapping trending news articles. 
+• Pipeline Details: 
+o Pick trending topics and content (e.g., from a news article or trending 
+social media hashtag). 
+o Generate a short script based on the topic (use a simple AI-based script 
+generator or write it yourself). 
+o Generate 30-60 second videos with text overlays and images based on 
+the script (use Generative AI video generation tool) 
+• Deliverables:  
+Submit the application or tool source code, generated videos and a report 
+explaining on the steps followed. 
+ 
+Task 2: SEO Blog Post Creation Tool (Time Required: ~1 day) 
+• Objective: Create an AI based SEO Blog creation application or tool 
+• Pipeline Details: 
+o Scrap products from an e-commerce site (e.g., Amazon or eBay) which 
+are best-selling or trending. 
+o Automate the research of SEO keywords using a tool like Google 
+Keyword Planner or Ubersuggest (focus on 3-4 main keywords). 
+o Create a 150-200 word blog post content that highlights the product and 
+naturally incorporates the SEO keywords. 
+o Post the articles on self-hosted site, medium, WordPress, etc. 
+• Deliverables:  
+Submit the application or tool source code, link where the blogs are posted and 
+a report explaining on the steps followed. 
+ 
+Task 3: High-Level to Low-Level Architecture Pipeline ( ~1 day) 
+• Objective: Create an AI based automation tool which simplifies the process of 
+converting high-level business requirements into low-level technical 
+specifications 
+
+• Pipeline Details: 
+o Analyze a given high-level business requirement and break it down into 
+modules, schemas, and pseudo code. 
+o Design a basic tool or script that automates part of this process. 
+ 
+Expected Outcome: A working prototype tool that can convert simple high-level 
+requirements into low-level technical details. 
+ 
+Internship Expectations: 
+• Task Duration: Each task is designed to be completed within 1 day, giving you 
+time to explore and iterate on your solution. 
+• Skills: The tasks require proficiency in AI tools, data scraping, content 
+generation, and architecture design. 
+• Outcome: The goal is to create a prototype for each of the tasks that 
+demonstrates the core functionality of the pipeline. 
+ 
+Evaluation Criteria: 
+• Feasibility of implementation. 
+• Clear, simple, and practical use of AI tools and basic automation. 
+• Quality of the work submitted and ease of understanding. 
