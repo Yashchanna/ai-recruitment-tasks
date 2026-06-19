@@ -1,4 +1,4 @@
-# 🤖 GenAI Suite — Unified Recruitment Tasks Dashboard
+#  GenAI Suite — Unified Recruitment Tasks Dashboard
 
 Welcome to the **GenAI Recruitment Tasks Suite**! This repository houses three state-of-the-art AI automation tools built to demonstrate modular Python engineering, data scraping, speech synthesis, generative content modeling, and serverless deployment capabilities. 
 
@@ -6,12 +6,12 @@ All three tasks are accessible through a single, unified web interface deployed 
 
 ---
 
-## 🌐 Live Production Deployments
+##  Live Production Deployments
 You can interact with the live working prototypes directly in your browser:
 
-*   **🎬 Task 1: AI Video Studio** — [https://task3architecturepipeline.vercel.app/task1](https://task3architecturepipeline.vercel.app/task1)
-*   **✍️ Task 2: SEO Blog Creator** — [https://task3architecturepipeline.vercel.app/task2](https://task3architecturepipeline.vercel.app/task2)
-*   **📐 Task 3: DevSpec Spec Studio** — [https://task3architecturepipeline.vercel.app/](https://task3architecturepipeline.vercel.app/)
+*   ** Task 1: AI Video Studio** — [https://task3architecturepipeline.vercel.app/task1](https://task3architecturepipeline.vercel.app/task1)
+*   ** Task 2: SEO Blog Creator** — [https://task3architecturepipeline.vercel.app/task2](https://task3architecturepipeline.vercel.app/task2)
+*   ** Task 3: DevSpec Spec Studio** — [https://task3architecturepipeline.vercel.app/](https://task3architecturepipeline.vercel.app/)
 
 ---
 
@@ -41,9 +41,9 @@ workspace-root/
 
 ---
 
-## ⚡ Task Deep Dives & Execution Workflows
+##  Task Deep Dives & Execution Workflows
 
-### 🎬 Task 1: AI Video Studio
+###  Task 1: AI Video Studio
 *   **Objective:** Create an AI tool that scrapes trending news headlines, generates short narrated scripts, and builds 30–60 second video clips.
 *   **Workflow:**
     1.  **News Scraper:** Extracts real-time trending news summaries from the Google News RSS feed using `feedparser`.
@@ -55,7 +55,7 @@ workspace-root/
     7.  **Virtual Web Player (Serverless):** Implements a Ken-Burns slideshow video player on Vercel utilizing base64 data-uris.
 *   **Detailed Process Report:** [task1_video_generator/process_report.md](file:///E:/Syn%20Assesment/task1_video_generator/process_report.md)
 
-### ✍️ Task 2: SEO Blog Creator
+###  Task 2: SEO Blog Creator
 *   **Objective:** Crawl popular e-commerce listings, scrape autocomplete Google search queries, and draft a 150-200 word review blog post naturally incorporating target SEO keywords.
 *   **Workflow:**
     1.  **Marketplace Scraper:** Queries eBay for product keywords and parses listings (title, price, link) using `BeautifulSoup`.
@@ -74,7 +74,7 @@ workspace-root/
 
 ---
 
-## 🚀 Installation & Local Execution
+##  Installation & Local Execution
 
 ### 1. Prerequisite Installations
 Ensure you have Python 3.11+, Node.js (LTS), and Git installed. 
